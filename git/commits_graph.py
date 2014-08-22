@@ -28,6 +28,15 @@ def generate_graph_data(commits):
         ],  // node
     """
 
+    # cm = []
+    # for commit in commits:
+    #   cm.append({
+    #     'sha': commit.sha,
+    #     'parents': commit.parents,
+    #   })
+
+    # return fmt(cm)
+
     nodes = []
     branch_idx = [0]
     reserve = []
@@ -75,7 +84,10 @@ def generate_graph_data(commits):
                           routes)
         nodes.append(node)
 
-    return json.dumps(nodes)
+    return fmt(nodes)
+
+def fmt(data):
+    return json.dumps(data, sort_keys=True, indent=4, separators=(',', ': '))
 
 
 def _make_node(sha, offset, branch, routes):
