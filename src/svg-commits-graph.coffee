@@ -46,7 +46,7 @@ branchCount = (data) ->
     i++
   maxBranch + 1
 
-class PathData
+class SVGPath
   constructor: ->
     @commands = []
   toString: ->
@@ -109,7 +109,7 @@ CommitsGraph = React.createClass
       x = width - (dot_offset + 1) * x_step
       y = (idx + 0.5) * y_step
 
-    buffers.dots.push <circle cx={x} cy={y} r={radius} style={stroke: colour, fill: colour}/>
+    buffers.dots.push <circle cx={x} cy={y} r={radius} style={stroke: colour, fill: colour} id={sha}/>
 
     # draw routes
     svgRoutes = for route, index in routes_data
@@ -122,7 +122,7 @@ CommitsGraph = React.createClass
 
     colour = getColour(branch)
     
-    d = new PathData
+    d = new SVGPath
 
     if @props.orientation is "horizontal"
       from_x_hori = width - (commit_idx + 0.5) * x_step
